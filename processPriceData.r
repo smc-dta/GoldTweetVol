@@ -2,29 +2,13 @@
 #
 ######################################################################################
 
-library(httr)
+##read gold price data
+cc <- c("character", "numeric")
+p <- read.table("goldPriceData.csv", header = TRUE, sep=",", quote = " ",
+                colClasses = cc)
+p[,1] <- as.Date(as.character(p[,1]), format = "%m/%d/%Y")
 
-
-
-terms <- ""
-download <- ""
-
-values <- list(agree = "yes", path = "SAMHDA")
-
-# Accept the terms on the form, 
-# generating the appropriate cookies
-POST(terms, body = values)
-GET(download)
-
-# Actually download the file (this will take a while)
-resp <- GET(download, query = values)
-
-# write the content of the download to a binary file
-writeBin(content(resp, "raw"), "c:/temp/thefile.zip")
-
-
-
-
+#df "p" has gold price data
 p <- p[p$date > as.Date("6/28/2012", format = "%m/%d/%Y", ), ]
 
 #Plot chart of gold price

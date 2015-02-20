@@ -3,12 +3,12 @@
 ######################################################################################
 
 #Read in list of influential tweeters
-tweeters <- read.csv("goldTweets/data/inflist.csv", header = TRUE)
+tweeters <- read.csv("inflist.csv", header = TRUE)
 
 #Read files in data folder
 #Filter for those authored by influential tweeters
 #Filter those containing gold words
-filenames <- list.files("goldTweets/tweets", pattern="*.csv", full.names=TRUE)
+filenames <- list.files("tweets", pattern="*.csv", full.names=TRUE)
 goldtweets <- NULL  #This object will hold all the gold tweets
 for(i in 1:length(filenames)){
       t <- read.csv(filenames[i], header = T, comment.char = "") 
