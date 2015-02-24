@@ -3,7 +3,7 @@
 ######################################################################################
 
 #Read in list of influential tweeters
-tweeters <- read.csv("inflist.csv", header = TRUE)
+tweeters <- read.csv("data/inflist.csv", header = TRUE)
 
 #Read files in data folder
 #Filter for those authored by influential tweeters

@@ -4,7 +4,7 @@
 
 ##read gold price data
 cc <- c("character", "numeric")
-p <- read.table("goldPriceData.csv", header = TRUE, sep=",", quote = " ",
+p <- read.table("data/goldPriceData.csv", header = TRUE, sep=",", quote = " ",
                 colClasses = cc)
 p[,1] <- as.Date(as.character(p[,1]), format = "%m/%d/%Y")
 
