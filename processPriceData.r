@@ -1,5 +1,5 @@
 ######################################################################################
-#
+#Read & Plot Gold Price Data; Calculate Daily Price Return & Volatility
 ######################################################################################
 
 ##read gold price data
@@ -28,13 +28,13 @@ holidays <- c("2012-12-24","2012-12-25","2012-12-26","2012-12-31","2013-01-01",
               "2013-12-24","2013-12-25","2013-12-26","2013-12-31","2014-01-01")                  
 p <- p[! p$date %in% as.Date(holidays), ]
 
-#Calculate daily returns
-pdata <- na.omit(mutate(p, d = ((lag(p$price)-p$price)/p$price)*100)) #create daily pct change
+#Calculate daily return
+pdata <- na.omit(mutate(p, r = ((lag(p$price)-p$price)/p$price)*100)) #create daily pct change
 #ar= absolute value of daily pct change
-pdata$ar <- abs(pdata$d) 
+pdata$ar <- abs(pdata$r) 
 
 #Plot chart of daily returns
-a <- ggplot(data=pdata, aes(x=date, y=d, format(scientific=FALSE)))
+a <- ggplot(data=pdata, aes(x=date, y=r, format(scientific=FALSE)))
 theme_new <- theme_set(theme_bw())
 a + layer(
   geom = "line",
