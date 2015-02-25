@@ -1,14 +1,12 @@
 ######################################################################################
-#
+#Read Tweet Files; Filter for Gold Tweets 
 ######################################################################################
 
-#Read in list of influential tweeters
+###Read in list of influential tweeters
 tweeters <- read.csv("data/inflist.csv", header = TRUE)
 
-#Read files in data folder
-#Filter for those authored by influential tweeters
-#Filter those containing gold words
-filenames <- list.files("tweets", pattern="*.csv", full.names=TRUE)
+###Read files in data folder, filter for author and gold words
+filenames <- list.files("tweets", pattern = "*.csv", full.names = TRUE)
 goldtweets <- NULL  #This object will hold all the gold tweets
 for(i in 1:length(filenames)){
       t <- read.csv(filenames[i], header = T, comment.char = "") 
@@ -23,13 +21,14 @@ for(i in 1:length(filenames)){
       goldtweets <- as.data.frame(rbind(goldtweets, gold))
     }
 
-#Calculate tweets per day, put in data.frame "gt"
-goldtweets$date <- substr(goldtweets$created_at,1,10)
+###Calculate tweets per day, put in data.frame "gt"
+goldtweets$date <- substr(goldtweets$created_at, 1, 10)
 gt <- goldtweets %>% group_by(date)
 gt <- na.omit(gt %>% summarise(n = n()))
 gt$date <- as.Date(gt$date)
 
-plot(gtw$date, gtw$n, type = "l", col = "red", main = "Daily Volume of Gold Tweets", 
+###Plot daily volume of tweets about gold
+plot(gt$date, gt$n, type = "l", col = "red", main = "Daily Volume of Gold Tweets", 
      xlab = " ", ylab = "n")
 
 
